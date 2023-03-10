@@ -1,0 +1,118 @@
+Q1. What is an Exception in python? Write the difference between Exceptions and syntax errors ?
+
+# Exceptions are raised when the program is syntactically correct, but the code resulted in an error. This error does not stop the execution of the program, however, it changes the normal flow of the program.d
+
+DIFFERENCE
+# When in the runtime an error that occurs after passing the syntax test is called exception or logical type. For example, when we divide any number by zero then the ZeroDivisionError exception is raised, or when we import a module that does not exist then ImportError is raised.
+
+#Syntax errors occur when the parser detects an incorrect statement example we miss a ':' it will give a syntex error.
+
+Q2. What happens when an exception is not handled? Explain with an example?
+#When an exception is not handled--
+*It disturbs normal flow of program
+*Complete program will not get executed
+
+marks = 10000
+# perform division with 0 
+a = marks / 0 
+print(a) 
+
+here,Normal flow of program is disturbed
+
+Q3. Which Python statements are used to catch and handle exceptions? Explain with an example.
+Try and except statements are used to catch and handle exceptions in Python. Statements that can raise exceptions are kept inside the try clause and the statements that handle the exception are written inside except clause.
+
+a = [1, 2, 3]
+try:
+    print ("Second element = %d" %(a[1]))
+ 
+    # Throws error since there are only 3 elements in array
+    print ("Fourth element = %d" %(a[3]))
+ 
+except:
+    print ("An error occurred")
+    
+In the above example, the statements that can cause the error are placed inside the try statement (second print statement in our case). The second print statement tries to access the fourth element of the list which is not there and this throws an exception. This exception is then caught by the except statement.
+
+Q4. Explain with an exmple: 
+* try and except
+* try and else 
+*finally 
+* raise
+
+1)Try and except statements are used to catch and handle exceptions in Python. Statements that can raise exceptions are kept inside the try clause and the statements that handle the exception are written inside except clause.
+try:
+    # code that may cause exception
+except:
+    # code to run when exception occurs
+
+a = [1, 2, 3]
+try:
+    print ("Second element = %d" %(a[1]))
+ 
+    # Throws error since there are only 3 elements in array
+    print ("Fourth element = %d" %(a[3]))
+ 
+except:
+    print ("An error occurred")
+
+2)In python, we use the else clause on the try-except block which must be present after all the except clauses. The code enters the else block only if the try clause does not raise an exception.
+
+def AbyB(a , b):
+    try:
+        c = ((a+b) / (a-b))
+    except ZeroDivisionError:
+        print ("a/b result in 0")
+    else:
+        print (c)
+ 
+AbyB(2.0, 3.0)
+AbyB(3.0, 3.0)
+
+3)Python provides a keyword finally, which is always executed after the try and except blocks. The final block always executes after normal termination of try block or after try block terminates due to some exception.
+
+try:
+    k = 5//0  # raises divide by zero exception.
+    print(k)
+ 
+# handles zerodivision exception
+except ZeroDivisionError:
+    print("Can't divide by zero")
+ 
+finally:
+    # this block is always executed
+    # regardless of exception generation.
+    print('This is always executed')
+    
+4)The raise statement allows the programmer to force a specific exception to occur. The sole argument in raise indicates the exception to be raised. This must be either an exception instance or an exception class (a class that derives from Exception).
+
+try:
+    raise NameError("Hi there")  # Raise Error
+except NameError:
+    print ("An exception")
+    raise  # To determine whether the exception was raised or not
+    
+Q5. What are Custom Exceptions in python? Why do we need Custom Exeptions? Explain with an exmple.
+Python also allows us to define our own custom Exceptions. We are in complete control of what this Exception can do, and when it can be raised, using the raise keyword.
+
+Some time we have to define and raise exceptions explicitly to indicate that something goes wrong ,such type of exceptions are called Custom Exceptions.
+
+In the below example an exception is created if the age variable is smaller than 1
+age = -1
+if age < 1:
+    raise RuntimeError("Wrong age")
+else:
+    print("Done")
+
+Q6. Create a custom exception class. Use this class to handle an exception
+
+class NegativeAgeException(Exception):
+    def init(self,arg):
+        self.msg=arg
+
+age = -1
+if age < 1:
+    raise NegativeAgeException("Age can't be Negative")
+else:
+    print("Valid Age")
+
